@@ -19,9 +19,7 @@
     /* Top bar */
     .top{position:fixed; inset:0 0 auto 0; z-index:40; background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,0));}
     .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0}
-    .brand{display:flex; align-items:center; gap:12px; font-weight:700; letter-spacing:.4px}
     .logo-img{height:26px; filter:invert(1) brightness(190%);} /* logo negro → blanco */
-    .right{display:flex; gap:12px; align-items:center}
     .lang{padding:6px 10px; border:1px solid #fff; border-radius:999px; font-size:.9rem}
 
     /* HERO */
@@ -29,23 +27,17 @@
     .hero video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(105%) saturate(102%) brightness(.92)}
     .hero .veil{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 40%, rgba(0,0,0,.75));}
     .hero .title{position:absolute; inset:auto 0 12vh 0; text-align:center; padding:0 20px}
-    .hero h1{font-size:clamp(40px,10vw,96px); line-height:0.92; margin:0 0 14px; font-weight:700; letter-spacing:.5px}
-    .hero .kicker{font-size:clamp(14px,2.2vw,18px); color:var(--muted)}
+    .hero h1{font-size:clamp(40px,10vw,96px); line-height:0.92; margin:0; font-weight:700; letter-spacing:.5px}
     .soundbtn{position:absolute; right:18px; bottom:18vh; display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.7); background:rgba(0,0,0,.35); color:#fff; font-weight:600; cursor:pointer}
 
     /* Sections */
     .section{padding:72px 0}
     h2{font-size:14px; letter-spacing:.24em; text-transform:uppercase; color:#cfcfcf; margin:0 0 24px}
 
-    /* Work grid */
-    .grid{display:grid; gap:18px}
-    @media(min-width:960px){ .grid.cols-3{grid-template-columns:repeat(3,1fr)} }
-    .card{position:relative; display:block; border-radius:12px; overflow:hidden; background:#111; border:1px solid var(--border); cursor:pointer}
-    .thumb{aspect-ratio:16/9; width:100%; height:auto; object-fit:cover; display:block; transition:transform .4s ease}
-    .card:hover .thumb{ transform:scale(1.02) }
-    .cap{position:absolute; left:12px; bottom:10px; right:12px; display:flex; justify-content:space-between; gap:8px; align-items:flex-end; pointer-events:none}
-    .cap .t{font-weight:600; text-shadow:0 1px 12px rgba(0,0,0,.6)}
-    .cap .s{font-size:.9rem; color:#e6e6e6; opacity:.9}
+    /* CTA portfolio */
+    .cta-wrap{display:flex; justify-content:center}
+    .cta{display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border:1px solid #fff; border-radius:999px; font-weight:700}
+    .cta:hover{background:#fff; color:#000}
 
     /* Contact */
     #contact p, #contact a{font-size:0.95rem; color:#dcdcdc}
@@ -59,12 +51,8 @@
   <!-- TOP NAV -->
   <div class="top">
     <div class="container nav">
-      <div class="brand">
-        <img class="logo-img" src="assets/cuatro_ai_logo_black.svg" alt="Cuatro.ai" />
-      </div>
-      <div class="right">
-        <a id="langBtn" class="lang" href="#">EN</a>
-      </div>
+      <img class="logo-img" src="assets/cuatro_ai_logo_black.svg" alt="Cuatro.ai" />
+      <a id="langBtn" class="lang" href="#">EN</a>
     </div>
   </div>
 
@@ -76,48 +64,26 @@
     <div class="veil" aria-hidden="true"></div>
     <div class="title">
       <h1 data-i18n="hero.title">AI-DRIVEN FILM & ART DIRECTION</h1>
-      <div class="kicker" data-i18n="hero.kicker">Buenos Aires · Global</div>
     </div>
     <button id="soundBtn" class="soundbtn" aria-label="Toggle sound"><span id="soundLabel">Sound off</span></button>
   </section>
 
   <main>
-    <!-- WORK GRID -->
-    <section id="work" class="section container">
-      <h2 data-i18n="work.title">Selected Projects</h2>
-      <div class="grid cols-3">
-        <a class="card" href="https://www.dropbox.com/scl/fi/ey6orv0bif1uyxdjy80fy/250711-Apertura-Marcha-Perruna-ProresHQ.mov?rlkey=a2iji3lji5gq89meffk1gtji3&raw=1" target="_blank" rel="noopener">
-          <img class="thumb" src="assets/apertura-thumb.jpg" alt="Apertura Guida Kazca — Buenas Noches Familia" />
-          <div class="cap"><div class="t">Apertura Guida Kazca</div><div class="s">Buenas Noches Familia</div></div>
-        </a>
-
-        <a class="card" href="https://www.dropbox.com/scl/fi/4k7w5s92x03gf2cy683vs/6B-corregida-V03.mp4?rlkey=a3bz1c3tiicovmxz2gyy2bnjg&raw=1" target="_blank" rel="noopener">
-          <img class="thumb" src="assets/bbva-thumb.jpg" alt="BBVA AutoMarket" />
-          <div class="cap"><div class="t">BBVA AutoMarket</div><div class="s">Generative Art Direction</div></div>
-        </a>
-
-        <a class="card" href="https://www.dropbox.com/scl/fi/mz08qncz5up5n82mdy54u/TOMA_TEIC_01_alta-sub-espa-ol-V04.mov?rlkey=rxwhwn6u4q9mirb3xq56s6s1i&raw=1" target="_blank" rel="noopener">
-          <img class="thumb" src="assets/techint-thumb.jpg" alt="Techint · Ternium" />
-          <div class="cap"><div class="t">Techint · Ternium</div><div class="s">Executive Portraits</div></div>
-        </a>
-
-        <a class="card" href="https://www.dropbox.com/scl/fi/g6sewda1jjiqp666vai2c/241216-CRUELLA-Videoclip-Master-ALTA.mov?rlkey=hu3esz127iozaqhc6g51dp6x2&raw=1" target="_blank" rel="noopener">
-          <img class="thumb" src="assets/cruella-thumb.jpg" alt="CRUELLA Videoclip" />
-          <div class="cap"><div class="t">CRUELLA</div><div class="s">Videoclip</div></div>
-        </a>
-
-        <a class="card" href="https://www.dropbox.com/scl/fi/2a5u659bk5d8iv3sobl5l/Full_Pollo_AI_animacion_02.mp4?rlkey=87w0zckqj0s4bj3ejixdukif3&raw=1" target="_blank" rel="noopener">
-          <img class="thumb" src="assets/ypf-thumb.jpg" alt="YPF · Pollo IA — Animación" />
-          <div class="cap"><div class="t">YPF</div><div class="s">Pollo IA · Animación</div></div>
-        </a>
+    <!-- CTA A PORTFOLIO -->
+    <section class="section container" id="portfolio">
+      <h2 data-i18n="portfolio.title">Portfolio</h2>
+      <div class="cta-wrap">
+        <a class="cta" href="https://cuatroai.myportfolio.com/" target="_blank" rel="noopener" data-i18n="portfolio.cta">Ver portfolio completo</a>
       </div>
     </section>
 
+    <!-- ABOUT -->
     <section id="about" class="section container">
       <h2 data-i18n="about.title">About</h2>
       <p data-i18n="about.text">Creative studio by Julieta Wagner (Art Direction) & Sabrina Korn (Creativity / AI). We blend film, design and artificial intelligence to craft bold visual narratives for brands and production companies.</p>
     </section>
 
+    <!-- CONTACTO -->
     <section id="contact" class="section container">
       <h2 data-i18n="contact.title">Contact</h2>
       <p>
@@ -146,14 +112,16 @@
   <script>
     // ====== i18n simple ======
     const STR = {
-      es:{ 'nav.work':'proyectos','nav.about':'equipo','nav.contact':'contacto',
-           'hero.title':'Dirección de arte & film con IA','hero.kicker':'Buenos Aires · Global',
-           'work.title':'Proyectos destacados','about.title':'Equipo',
+      es:{ 'hero.title':'Dirección de arte & film con IA',
+           'portfolio.title':'Portfolio',
+           'portfolio.cta':'Ver portfolio completo',
+           'about.title':'Equipo',
            'about.text':'Estudio creativo de Julieta Wagner (Dirección de Arte) y Sabrina Korn (Creatividad / IA). Cruzamos cine, diseño e inteligencia artificial para crear narrativas visuales fuertes.',
            'contact.title':'Contacto' },
-      en:{ 'nav.work':'work','nav.about':'about','nav.contact':'contact',
-           'hero.title':'AI-DRIVEN FILM & ART DIRECTION','hero.kicker':'Buenos Aires · Global',
-           'work.title':'Selected Projects','about.title':'About',
+      en:{ 'hero.title':'AI-DRIVEN FILM & ART DIRECTION',
+           'portfolio.title':'Portfolio',
+           'portfolio.cta':'View full portfolio',
+           'about.title':'About',
            'about.text':'Creative studio by Julieta Wagner (Art Direction) & Sabrina Korn (Creativity / AI). We blend film, design and AI to craft bold visual narratives.',
            'contact.title':'Contact' }
     };
@@ -180,13 +148,11 @@
     v.addEventListener('loadedmetadata', syncSoundLabel);
     v.addEventListener('volumechange', syncSoundLabel);
     soundBtn.addEventListener('click', ()=>{
-      v.muted = !v.muted; // los navegadores permiten unmute tras interacción
+      v.muted = !v.muted; // unmute permitido tras interacción del usuario
       v.play().catch(()=>{});
       syncSoundLabel();
     });
-    // asegurar estado inicial correcto
     syncSoundLabel();
   </script>
 </body>
 </html>
-
