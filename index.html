@@ -28,7 +28,7 @@
 <style>
 :root{ --bg:#000; --fg:#fff; --muted:#bdbdbd; --border:#222; --max:1400px; --ring:#6ee7ff }
 *{box-sizing:border-box}
-html,body{height:100%}
+html,body{min-height:100%}
 body{margin:0; font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--fg)}
 a{color:inherit; text-decoration:none}
 a:focus-visible, button:focus-visible{ outline:3px solid var(--ring); outline-offset:2px; border-radius:8px }
@@ -41,7 +41,7 @@ a:focus-visible, button:focus-visible{ outline:3px solid var(--ring); outline-of
 .lang{padding:6px 12px; border:1px solid #fff; border-radius:999px; font-size:.9rem}
 
 
-.hero{position:relative; height:100vh; overflow:hidden}
+.hero{position:relative; min-height:100svh; height:100vh; overflow:hidden}
 .hero video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(105%) saturate(102%) brightness(.92)}
 .hero .veil{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 40%, rgba(0,0,0,.8));}
 .hero .title{position:absolute; inset:auto 0 12vh 0; text-align:center; padding:0 20px}
@@ -61,6 +61,12 @@ h2{font-size:14px; letter-spacing:.24em; text-transform:uppercase; color:#cfcfcf
 .cta:hover{background:#fff; color:#000}
 
 
+/* Center portfolio section */
+#portfolio{ text-align:center }
+#portfolio h2{ text-align:center }
+#portfolio .cta-wrap{ justify-content:center }
+
+
 #contact p, #contact a{font-size:0.95rem; color:#dcdcdc}
 #contact a:hover{opacity:.85}
 
@@ -68,7 +74,7 @@ h2{font-size:14px; letter-spacing:.24em; text-transform:uppercase; color:#cfcfcf
 footer{border-top:1px solid var(--border); padding:36px 0 70px; color:#cfcfcf}
 
 
-@media (prefers-reduced-motion: reduce){.hero video{animation:none; filter:none}}
+@media (prefers-reduced-motion: reduce){.hero video{animation:none; filter:none} body{scroll-behavior:auto}}
 </style>
 </head>
 <body>
@@ -77,17 +83,4 @@ footer{border-top:1px solid var(--border); padding:36px 0 70px; color:#cfcfcf}
 <img class="logo-img" src="assets/cuatro_ai_logo_black.svg" alt="Cuatro.ai" />
 <a id="langBtn" class="lang" href="#" aria-label="Cambiar idioma">EN</a>
 </div>
-</div>
-
-
-<section class="hero" aria-label="Reel">
-<video id="heroVideo" autoplay muted loop playsinline preload="metadata" poster="assets/hero-poster.jpg">
-<source src="https://www.dropbox.com/scl/fi/kyr4aqjpl0sugzhijeaie/REEL-20-octubre.mp4?rlkey=61wt92du260uwsgkidkyhct0m&raw=1" type="video/mp4" />
-</video>
-<div class="veil" aria-hidden="true"></div>
-<div class="title">
-<h1 data-i18n="hero.title">AI Creative Studio</h1>
-</div>
-<button id="soundBtn" class="soundbtn" role="switch" aria-checked="false">
-<span id="soundLabel">Sonido apagado</span>
 </html>
