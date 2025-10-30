@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cuatro.ai — Dirección de arte generativa</title>
-  <meta name="description" content="Cuatro.ai — Estudio de Julieta Wagner y Sabrina Korn. Dirección de arte generativa, video con IA y producción audiovisual." />
+  <title>Cuatro.ai — Estudio creativo IA</title>
+  <meta name="description" content="Cuatro.ai — Estudio creativo IA de Julieta Wagner y Sabrina Korn. Dirección de arte generativa, video con IA y producción audiovisual." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
@@ -12,9 +12,15 @@
     :root{ --bg:#000; --fg:#fff; --muted:#bdbdbd; --border:#222; --max:1400px }
     *{box-sizing:border-box}
     html,body{height:100%}
-    body{margin:0; font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif; background:var(--bg); color:var(--fg)}
+    body{
+      margin:0; font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
+      background:var(--bg); color:var(--fg)
+    }
     a{color:inherit; text-decoration:none}
-    .container{max-width:var(--max); margin:0 auto; padding:0 24px}
+
+    /* Contenedor con padding responsivo y ancho cómodo */
+    .container{max-width:var(--max); margin:0 auto; padding:0 clamp(24px,6vw,80px)}
+    .narrow{max-width:1100px; margin:0 auto} /* centra textos largos */
 
     /* Top bar */
     .top{position:fixed; inset:0 0 auto 0; z-index:40; background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,0));}
@@ -26,9 +32,22 @@
     .hero{position:relative; height:100vh; overflow:hidden}
     .hero video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(105%) saturate(102%) brightness(.92)}
     .hero .veil{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 40%, rgba(0,0,0,.75));}
-    .hero .title{position:absolute; inset:auto 0 12vh 0; text-align:center; padding:0 20px}
-    .hero h1{font-size:clamp(40px,10vw,96px); line-height:0.92; margin:0; font-weight:700; letter-spacing:.5px}
-    .soundbtn{position:absolute; right:18px; bottom:18vh; display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.7); background:rgba(0,0,0,.35); color:#fff; font-weight:600; cursor:pointer}
+
+    /* Title centrado y con safe padding */
+    .hero .title{
+      position:absolute; inset:auto 0 10vh 0; text-align:center;
+      padding:0 clamp(24px, 6vw, 80px);
+    }
+    .hero h1{
+      font-size:clamp(42px, 9vw, 96px);
+      line-height:0.92; margin:0 auto; max-width:900px; font-weight:700; letter-spacing:.4px;
+    }
+
+    .soundbtn{
+      position:absolute; right:18px; bottom:18vh; display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.7);
+      background:rgba(0,0,0,.35); color:#fff; font-weight:600; cursor:pointer
+    }
 
     /* Sections */
     .section{padding:72px 0}
@@ -52,21 +71,20 @@
   <!-- TOP NAV -->
   <div class="top">
     <div class="container nav">
-      <img class="logo-img" src="assets/cuatro_ai_logo_black.svg" alt="Cuatro.ai" />
-      <a id="langBtn" class="lang" href="#">EN</a>
+      <a id="langBtn" class="lang" href="#" aria-label="Cambiar idioma">EN</a>
     </div>
   </div>
 
   <!-- HERO FULLSCREEN VIDEO -->
   <section class="hero" aria-label="Reel">
-    <video id="heroVideo" autoplay muted loop playsinline poster="assets/hero-poster.jpg">
-      <source src="https://www.dropbox.com/scl/fi/kyr4aqjpl0sugzhijeaie/REEL-20-octubre.mp4?rlkey=61wt92du260uwsgkidkyhct0m&raw=1" type="video/mp4" />
+    <video id="heroVideo" autoplay muted loop playsinline poster="assets/hero-poster.jpg" preload="metadata">
+      <source src="https://www.dropbox.com/scl/fi/nomz9ll0g56vcoz3qpcbp/REEL-Octubree-2025-con-t-tulos.mp4?rlkey=dbv9xs3wouiby0vmwp9pj9srw&raw=1" type="video/mp4" />
     </video>
     <div class="veil" aria-hidden="true"></div>
     <div class="title">
-      <h1 data-i18n="hero.title">Dirección de arte & film con IA</h1>
+      <h1 data-i18n="hero.title">Estudio creativo IA</h1>
     </div>
-    <button id="soundBtn" class="soundbtn" aria-label="Toggle sound"><span id="soundLabel">Sound off</span></button>
+    <button id="soundBtn" class="soundbtn" aria-label="Toggle sound"><span id="soundLabel">Sonido apagado</span></button>
   </section>
 
   <!-- MAIN CONTENT -->
@@ -81,26 +99,32 @@
 
     <!-- ABOUT -->
     <section id="about" class="section container">
-      <h2 data-i18n="about.title">Equipo</h2>
-      <p data-i18n="about.text">Estudio creativo formado por Julieta Wagner (Dirección de Arte) y Sabrina Korn (Creative Developer). Cruzamos cine, diseño e inteligencia artificial para crear narrativas visuales innovadoras.</p>
+      <div class="narrow">
+        <h2 data-i18n="about.title">Equipo</h2>
+        <p data-i18n="about.text">
+          Estudio creativo formado por Julieta Wagner (Dirección de Arte) y Sabrina Korn (Creative Developer). Cruzamos cine, diseño e inteligencia artificial para crear narrativas visuales innovadoras.
+        </p>
+      </div>
     </section>
 
     <!-- CONTACT -->
     <section id="contact" class="section container">
-      <h2 data-i18n="contact.title">Contacto</h2>
-      <p>
-        <a href="mailto:julietawagner@cuatroai.ar">julietawagner@cuatroai.ar</a> ·
-        <a href="mailto:sabrinakorn@cuatroai.ar">sabrinakorn@cuatroai.ar</a> ·
-        <a href="mailto:hola@cuatroai.ar">hola@cuatroai.ar</a>
-      </p>
-      <p>
-        <a href="tel:+5491143996388">+54 9 11 4399 6388</a> — Julieta Wagner<br>
-        <a href="tel:+5491160434440">+54 9 11 6043 4440</a> — Sabrina Korn (Creative Developer)
-      </p>
-      <p>
-        <a href="https://cuatroai.myportfolio.com/" target="_blank" rel="noopener">Portfolio</a> ·
-        <a href="https://vimeo.com/julietawagner" target="_blank" rel="noopener">Vimeo</a>
-      </p>
+      <div class="narrow">
+        <h2 data-i18n="contact.title">Contacto</h2>
+        <p>
+          <a href="mailto:julietawagner@cuatroai.ar">julietawagner@cuatroai.ar</a> ·
+          <a href="mailto:sabrinakorn@cuatroai.ar">sabrinakorn@cuatroai.ar</a> ·
+          <a href="mailto:hola@cuatroai.ar">hola@cuatroai.ar</a>
+        </p>
+        <p>
+          <a href="tel:+5491143996388">+54 9 11 4399 6388</a> — Julieta Wagner<br>
+          <a href="tel:+5491160434440">+54 9 11 6043 4440</a> — Sabrina Korn (Creative Developer)
+        </p>
+        <p>
+          <a href="https://cuatroai.myportfolio.com/" target="_blank" rel="noopener">Portfolio</a> ·
+          <a href="https://vimeo.com/julietawagner" target="_blank" rel="noopener">Vimeo</a>
+        </p>
+      </div>
     </section>
   </main>
 
@@ -113,60 +137,106 @@
 
   <!-- SCRIPT -->
   <script>
+    /* Diccionario i18n */
     const STR = {
       es: {
-        'hero.title': 'Dirección de arte & film con IA',
+        'hero.title': 'ESTUDIO CREATIVO IA',
         'portfolio.title': 'Portfolio',
         'portfolio.cta': 'Ver portfolio completo',
         'about.title': 'Equipo',
         'about.text': 'Estudio creativo formado por Julieta Wagner (Dirección de Arte) y Sabrina Korn (Creative Developer). Cruzamos cine, diseño e inteligencia artificial para crear narrativas visuales innovadoras.',
-        'contact.title': 'Contacto'
+        'contact.title': 'Contacto',
+        'ui.sound_on': 'Sonido encendido',
+        'ui.sound_off': 'Sonido apagado'
       },
       en: {
-        'hero.title': 'AI-DRIVEN FILM & ART DIRECTION',
+        'hero.title': 'CREATIVE STUDIO AI',
         'portfolio.title': 'Portfolio',
         'portfolio.cta': 'View full portfolio',
         'about.title': 'About',
         'about.text': 'Creative studio founded by Julieta Wagner (Art Direction) and Sabrina Korn (Creative Developer). We blend film, design and AI to craft bold and innovative visual narratives.',
-        'contact.title': 'Contact'
+        'contact.title': 'Contact',
+        'ui.sound_on': 'Sound on',
+        'ui.sound_off': 'Sound off'
       }
     };
 
-    let lang = navigator.language?.startsWith('es') ? 'es' : 'en';
+    /* Estado de idioma */
+    let lang = (localStorage.getItem('cuatro_lang')) || (navigator.language?.startsWith('es') ? 'es' : 'en');
+
     function setLang(l) {
+      lang = l;
+      localStorage.setItem('cuatro_lang', l);
       document.documentElement.lang = l;
-      document.title = l === 'es' ? 'Cuatro.ai — Dirección de arte generativa' : 'Cuatro.ai — Generative Art Direction';
+
+      // Title y description por idioma
+      document.title = l === 'es'
+        ? 'Cuatro.ai — Estudio creativo IA'
+        : 'Cuatro.ai — Generative Art Direction';
+
       document.querySelector('meta[name="description"]').setAttribute('content',
         l === 'es'
-          ? 'Cuatro.ai — Estudio de Julieta Wagner y Sabrina Korn. Dirección de arte generativa, video con IA y producción audiovisual.'
+          ? 'Cuatro.ai — Estudio creativo IA de Julieta Wagner y Sabrina Korn. Dirección de arte generativa, video con IA y producción audiovisual.'
           : 'Cuatro.ai — Creative studio by Julieta Wagner and Sabrina Korn. Generative art direction, AI-driven film and audiovisual production.'
       );
+
+      // Reemplazo de textos marcados con data-i18n
       document.querySelectorAll('[data-i18n]').forEach(el => {
         const k = el.getAttribute('data-i18n');
-        if (STR[l][k] !== undefined) el.innerHTML = STR[l][k];
+        if (STR[l] && STR[l][k] !== undefined) {
+          // Si el elemento es un botón/enlace, usamos textContent
+          if (el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'H1' || el.tagName === 'H2') {
+            el.textContent = STR[l][k];
+          } else {
+            el.innerHTML = STR[l][k];
+          }
+        }
       });
-      document.getElementById('langBtn').textContent = l === 'en' ? 'ES' : 'EN';
+
+      // Botón de idioma
+      const langBtn = document.getElementById('langBtn');
+      if (langBtn) langBtn.textContent = l === 'en' ? 'ES' : 'EN';
+
+      // Actualizamos etiqueta de sonido al idioma activo
+      syncSoundLabel();
     }
-    setLang(lang);
-    document.getElementById('langBtn').addEventListener('click', e => {
+
+    // Toggle idioma
+    document.getElementById('langBtn').addEventListener('click', (e) => {
       e.preventDefault();
-      lang = (lang === 'es' ? 'en' : 'es');
-      setLang(lang);
+      setLang(lang === 'es' ? 'en' : 'es');
     });
 
-    // SOUND TOGGLE
+    // ----- SONIDO -----
     const v = document.getElementById('heroVideo');
     const soundBtn = document.getElementById('soundBtn');
     const soundLabel = document.getElementById('soundLabel');
-    function syncSoundLabel(){ soundLabel.textContent = v.muted ? 'Sound off' : 'Sound on'; }
-    v.addEventListener('loadedmetadata', syncSoundLabel);
-    v.addEventListener('volumechange', syncSoundLabel);
-    soundBtn.addEventListener('click', ()=>{
-      v.muted = !v.muted;
-      v.play().catch(()=>{});
+
+    function syncSoundLabel(){
+      const key = v.muted ? 'ui.sound_off' : 'ui.sound_on';
+      soundLabel.textContent = STR[lang][key];
+    }
+
+    // Forzamos volumen y reproducción tras interacción
+    soundBtn.addEventListener('click', () => {
+      try {
+        v.muted = !v.muted;
+        if (!v.muted) {
+          v.volume = 1.0;
+          v.removeAttribute('muted'); // iOS/Safari
+        }
+        v.play().catch(()=>{});
+      } catch(e){}
       syncSoundLabel();
     });
+
+    // Sincroniza al cargar metadatos o cambios de volumen
+    ['loadedmetadata','volumechange','play','pause'].forEach(ev => v.addEventListener(ev, syncSoundLabel));
+
+    // Inicialización
+    setLang(lang);
     syncSoundLabel();
   </script>
 </body>
 </html>
+
