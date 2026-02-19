@@ -1,123 +1,1184 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Cuatro.ai — Portfolio</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuatro.ai — Estudio Creativo IA</title>
 
 <style>
-:root{
-  --bg:#000;
-  --fg:#fff;
-  --muted:#bdbdbd;
-}
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
 
-*{box-sizing:border-box}
-body{
-  margin:0;
-  background:var(--bg);
-  color:var(--fg);
-  font-family:'Space Grotesk',sans-serif;
-}
-
-.container{
-  max-width:1400px;
-  margin:0 auto;
-  padding:80px 40px;
-}
-
-h1{
-  font-size:clamp(36px,6vw,72px);
-  margin-bottom:60px;
-  font-weight:700;
-}
-
-.grid{
-  display:grid;
-  grid-template-columns:repeat(3,1fr);
-  gap:12px;
-}
-
-.tile{
-  position:relative;
-  height:300px;
-  border-radius:18px;
-  background:linear-gradient(135deg,#0e0e0e,#1a1a1a);
-  display:flex;
-  align-items:flex-end;
-  padding:24px;
-  transition:.35s ease;
-  overflow:hidden;
-}
-
-.tile:hover{
-  transform:translateY(-6px);
-  background:linear-gradient(135deg,#151515,#262626);
-}
-
-.caption{
-  font-size:1.2rem;
-  font-weight:600;
-}
-
-footer{
-  padding:80px 40px;
-  color:var(--muted);
-  font-size:.9rem;
-}
-
-@media(max-width:900px){
-  .grid{
-    grid-template-columns:1fr;
+  :root {
+    --black: #000;
+    --near-black: #080808;
+    --dark: #111;
+    --charcoal: #1a1a1a;
+    --mid: #333;
+    --grey: #666;
+    --silver: #999;
+    --light: #ccc;
+    --off-white: #e8e8e4;
+    --white: #f5f5f0;
+    --cream: #fafaf6;
+    --accent: #ff4d00;
   }
-}
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mid) var(--black);
+  }
+
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'Instrument Sans', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--accent);
+    color: var(--black);
+  }
+
+  a { color: inherit; text-decoration: none; }
+
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    mix-blend-mode: difference;
+  }
+
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  .lang-toggle {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+  }
+
+  .lang-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 3rem;
+    overflow: hidden;
+  }
+
+  .hero-video {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: contrast(105%) saturate(102%) brightness(.85);
+    background: #000;
+  }
+
+  .hero-video-fallback {
+    position: absolute;
+    inset: 0;
+    background: var(--black);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-video-fallback::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(255,77,0,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(100,100,255,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(255,77,0,0.03) 0%, transparent 40%);
+    animation: heroGlow 8s ease-in-out infinite alternate;
+  }
+  @keyframes heroGlow {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .hero-gradient {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(to top, var(--black), transparent);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: var(--silver);
+    max-width: 520px;
+    line-height: 1.7;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--off-white);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s ease forwards;
+    transition: color 0.3s;
+  }
+  .hero-cta:hover { color: var(--accent); }
+
+  .hero-cta .arrow {
+    width: 2.5rem;
+    height: 1px;
+    background: currentColor;
+    position: relative;
+    transition: width 0.3s;
+  }
+  .hero-cta:hover .arrow { width: 3.5rem; }
+
+  .hero-cta .arrow::after {
+    content: '';
+    position: absolute;
+    right: 0; top: -3px;
+    width: 8px; height: 8px;
+    border-right: 1px solid currentColor;
+    border-top: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s ease forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--grey);
+    writing-mode: vertical-rl;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--mid);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    animation: scrollDown 2s infinite;
+  }
+
+  @keyframes scrollDown {
+    0% { top: -100%; }
+    100% { top: 100%; }
+  }
+
+  /* ===== SECTION COMMON ===== */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  section { padding: 8rem 0; }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--grey);
+    font-weight: 600;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  /* ===== CLIENTS / SOCIAL PROOF ===== */
+  .clients {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem 0;
+    overflow: hidden;
+  }
+
+  .clients-track {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    animation: marquee 25s linear infinite;
+    white-space: nowrap;
+  }
+
+  .clients-track .client-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    flex-shrink: 0;
+    transition: color 0.3s;
+  }
+
+  .clients-track .client-name:hover { color: var(--off-white); }
+
+  .clients-track .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--mid);
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===== SERVICES ===== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 2rem;
+  }
+
+  .service-card {
+    background: var(--near-black);
+    padding: 3rem;
+    position: relative;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: var(--charcoal); }
+
+  .service-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+
+  .service-card p {
+    font-size: 0.88rem;
+    color: var(--silver);
+    line-height: 1.7;
+    max-width: 340px;
+  }
+
+  /* ===== PORTFOLIO GRID ===== */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 2rem;
+  }
+
+  .portfolio-item {
+    position: relative;
+    aspect-ratio: 16/10;
+    background: var(--charcoal);
+    overflow: hidden;
+    cursor: pointer;
+    display:block;
+  }
+
+  /* Imagen cover */
+  .portfolio-item::before{
+    content:'';
+    position:absolute;
+    inset:0;
+    background-image: var(--thumb);
+    background-size: cover;
+    background-position: center;
+    filter: saturate(1.02) contrast(1.02) brightness(0.9);
+    transform: scale(1.02);
+    transition: transform .45s ease, filter .45s ease;
+  }
+
+  .portfolio-item:hover::before{
+    transform: scale(1.06);
+    filter: saturate(1.05) contrast(1.06) brightness(1);
+  }
+
+  /* Overlay */
+  .portfolio-item .p-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.55);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.4s;
+    z-index: 2;
+  }
+
+  .portfolio-item:hover .p-overlay { opacity: 1; }
+
+  .portfolio-item .p-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .portfolio-item .p-client {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .portfolio-item .p-year { font-size: 0.7rem; color: rgba(255,255,255,0.7); }
+
+  .portfolio-cta { margin-top: 3rem; text-align: center; }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: var(--light);
+    font-weight: 400;
+  }
+
+  .about-text strong { color: var(--off-white); font-weight: 600; }
+
+  .about-founders {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .founder {
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  .founder h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .founder .role {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .founder p {
+    font-size: 0.85rem;
+    color: var(--silver);
+    line-height: 1.6;
+  }
+
+  /* ===== MANIFESTO ===== */
+  .manifesto {
+    text-align: center;
+    padding: 10rem 3rem;
+    position: relative;
+  }
+
+  .manifesto::before {
+    content: '4';
+    font-family: 'Syne', sans-serif;
+    font-size: 30rem;
+    font-weight: 800;
+    color: rgba(255,77,0,0.03);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .manifesto blockquote {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .manifesto blockquote em { font-style: italic; color: var(--accent); }
+
+  /* ===== CONTACT ===== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+  }
+
+  .contact-big {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .contact-big a { display: block; transition: color 0.3s; }
+  .contact-big a:hover { color: var(--accent); }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 0.5rem;
+  }
+
+  .contact-block h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--grey);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .contact-block p, .contact-block a {
+    font-size: 0.9rem;
+    color: var(--silver);
+    line-height: 1.8;
+    display: block;
+    transition: color 0.3s;
+  }
+
+  .contact-block a:hover { color: var(--off-white); }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--grey);
+    transition: color 0.3s;
+  }
+  .social-links a:hover { color: var(--accent); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.65rem;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ===== MODAL PLAYER (video/gif) ===== */
+  .modal {
+    position: fixed;
+    inset: 0;
+    z-index: 999;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 24px;
+  }
+  .modal.open { display: flex; }
+
+  .modal-inner{
+    width: min(1100px, 92vw);
+    aspect-ratio: 16 / 9;
+    background: #000;
+    border: 1px solid rgba(255,255,255,0.14);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .modal-close{
+    position:absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 5;
+    border: 1px solid rgba(255,255,255,0.25);
+    background: rgba(0,0,0,0.35);
+    color: rgba(255,255,255,0.9);
+    padding: 0.5rem 0.8rem;
+    font-size: .65rem;
+    letter-spacing: .2em;
+    text-transform: uppercase;
+    cursor: pointer;
+    backdrop-filter: blur(6px);
+    transition: all .25s;
+  }
+  .modal-close:hover{ border-color: var(--accent); color: var(--accent); }
+
+  .modal-video, .modal-img{
+    width:100%;
+    height:100%;
+    object-fit: contain;
+    background:#000;
+    display:none;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 3rem 1.5rem; min-height: 620px; }
+    .container { padding: 0 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .manifesto { padding: 6rem 1.5rem; }
+    .scroll-hint { display: none; }
+  }
 </style>
 </head>
 
 <body>
 
-<div class="container">
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">cuatro<span>.</span>ai</div>
+  <ul class="nav-links">
+    <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+    <li><a href="#about" data-i18n="nav.about">Nosotras</a></li>
+    <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+  </ul>
+  <div class="lang-toggle" id="langToggle">ES / EN</div>
+</nav>
 
-<h1>Portfolio</h1>
+<!-- HERO -->
+<section class="hero">
+  <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="metadata"></video>
+  <div class="hero-video-fallback" aria-hidden="true"></div>
+  <div class="hero-gradient"></div>
 
-<div class="grid">
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Estudio Creativo IA — Buenos Aires</div>
+    <h1 data-i18n="hero.h1">Creatividad<br>artificial.<br><em>Resultados reales.</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">
+      Dirección de arte + desarrollo creativo con inteligencia artificial para publicidad, cine y contenido social.
+    </p>
+    <a href="#portfolio" class="hero-cta" data-i18n="hero.cta">
+      Ver portfolio <span class="arrow"></span>
+    </a>
+  </div>
 
-<a class="tile" href="https://www.dropbox.com/scl/fi/aylk7b1u6720gtjbzc10i/Tienda-Inglesa-Invisible-NoSubs-25-11-20.mp4?rlkey=2vjg5iieu7hgoy7mh4hyzrifv&raw=1" target="_blank">
-  <div class="caption">Tienda Inglesa</div>
-</a>
+  <div class="scroll-hint">
+    <span data-i18n="hero.scroll">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
 
-<a class="tile" href="https://www.dropbox.com/scl/fi/6mhhhfpdvms0i9ni41f31/cuatro_ai_loop.gif?rlkey=n1r7cb7cmtm0kxfuru8s09u1n&raw=1" target="_blank">
-  <div class="caption">Cuatro AI Loop</div>
-</a>
+<!-- CLIENTS MARQUEE -->
+<div class="clients">
+  <div class="clients-track">
+    <span class="client-name">YPF</span><span class="dot"></span>
+    <span class="client-name">BBVA</span><span class="dot"></span>
+    <span class="client-name">Jumex</span><span class="dot"></span>
+    <span class="client-name">Techint</span><span class="dot"></span>
+    <span class="client-name">Natura</span><span class="dot"></span>
+    <span class="client-name">Corona</span><span class="dot"></span>
+    <span class="client-name">Sedal</span><span class="dot"></span>
+    <span class="client-name">Tienda Inglesa</span><span class="dot"></span>
+    <span class="client-name">Donnaluna</span><span class="dot"></span>
+    <span class="client-name">Kongo</span><span class="dot"></span>
 
-<a class="tile" href="https://www.dropbox.com/scl/fi/2a5u659bk5d8iv3sobl5l/Full_Pollo_AI_animacion_02.mp4?rlkey=87w0zckqj0s4bj3ejixdukif3&raw=1" target="_blank">
-  <div class="caption">YPF Full Pollo AI</div>
-</a>
-
-<a class="tile" href="https://www.dropbox.com/scl/fi/4k7w5s92x03gf2cy683vs/6B-corregida-V03.mp4?rlkey=a3bz1c3tiicovmxz2gyy2bnjg&raw=1" target="_blank">
-  <div class="caption">BBVA</div>
-</a>
-
-<a class="tile" href="https://www.dropbox.com/scl/fi/6tcgun2l39j74zq9u55b5/241216-CRUELLA-Videoclip-Master-ALTA.mov?rlkey=gmvsibr3o34hln3rwsv7g62uk&raw=1" target="_blank">
-  <div class="caption">Cruella</div>
-</a>
-
-<a class="tile" href="https://www.dropbox.com/scl/fi/mz08qncz5up5n82mdy54u/TOMA_TEIC_01_alta-sub-espa-ol-V04.mov?rlkey=rxwhwn6u4q9mirb3xq56s6s1i&raw=1" target="_blank">
-  <div class="caption">Techint</div>
-</a>
-
+    <span class="client-name">YPF</span><span class="dot"></span>
+    <span class="client-name">BBVA</span><span class="dot"></span>
+    <span class="client-name">Jumex</span><span class="dot"></span>
+    <span class="client-name">Techint</span><span class="dot"></span>
+    <span class="client-name">Natura</span><span class="dot"></span>
+    <span class="client-name">Corona</span><span class="dot"></span>
+    <span class="client-name">Sedal</span><span class="dot"></span>
+    <span class="client-name">Tienda Inglesa</span><span class="dot"></span>
+    <span class="client-name">Donnaluna</span><span class="dot"></span>
+    <span class="client-name">Kongo</span><span class="dot"></span>
+  </div>
 </div>
 
-</div>
+<!-- SERVICES -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-label" data-i18n="services.label">Lo que hacemos</div>
+    <h2 class="section-title" data-i18n="services.title">
+      Somos el estudio que las marcas eligen<br>cuando necesitan que la IA no parezca IA.
+    </h2>
 
-<footer class="container">
-© 2026 Cuatro.ai — Generative Art Direction
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3 data-i18n="services.s1.h">Dirección de Arte con IA</h3>
+        <p data-i18n="services.s1.p">Campañas publicitarias, key visuals y contenido de marca con herramientas generativas bajo ojo de directora de arte.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3 data-i18n="services.s2.h">Video & Motion</h3>
+        <p data-i18n="services.s2.p">Cortos publicitarios, videoclips y piezas de motion con IA generativa. Del tratamiento creativo al producto final.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3 data-i18n="services.s3.h">Contenido Social</h3>
+        <p data-i18n="services.s3.p">Foto, video y motion para redes sociales. Producción ágil con calidad de campaña. Volumen sin sacrificar estética.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">04</div>
+        <h3 data-i18n="services.s4.h">3D & Unreal Engine</h3>
+        <p data-i18n="services.s4.p">Creación 3D, moodboards, tratamientos creativos con IA e integración con Unreal Engine para cine y publicidad.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-label" data-i18n="portfolio.label">Trabajos seleccionados</div>
+    <h2 class="section-title" data-i18n="portfolio.title">Portfolio</h2>
+
+    <!-- Cada item: imagen (thumb) + link al video/gif -->
+    <div class="portfolio-grid">
+
+      <a class="portfolio-item"
+         style="--thumb:url('assets/p1.jpg')"
+         href="#"
+         data-type="video"
+         data-src="https://www.dropbox.com/scl/fi/aylk7b1u6720gtjbzc10i/Tienda-Inglesa-Invisible-NoSubs-25-11-20.mp4?rlkey=2vjg5iieu7hgoy7mh4hyzrifv&raw=1">
+        <div class="p-overlay">
+          <div class="p-client">Tienda Inglesa</div>
+          <div class="p-title" data-i18n="portfolio.p1">Corto publicitario "Invisible"</div>
+          <div class="p-year">2026</div>
+        </div>
+      </a>
+
+      <a class="portfolio-item"
+         style="--thumb:url('assets/p2.jpg')"
+         href="#"
+         data-type="img"
+         data-src="https://www.dropbox.com/scl/fi/6mhhhfpdvms0i9ni41f31/cuatro_ai_loop.gif?rlkey=n1r7cb7cmtm0kxfuru8s09u1n&raw=1">
+        <div class="p-overlay">
+          <div class="p-client">Cuatro.ai</div>
+          <div class="p-title" data-i18n="portfolio.p2">Loop generativo</div>
+          <div class="p-year">2025</div>
+        </div>
+      </a>
+
+      <a class="portfolio-item"
+         style="--thumb:url('assets/p3.jpg')"
+         href="#"
+         data-type="video"
+         data-src="https://www.dropbox.com/scl/fi/2a5u659bk5d8iv3sobl5l/Full_Pollo_AI_animacion_02.mp4?rlkey=87w0zckqj0s4bj3ejixdukif3&raw=1">
+        <div class="p-overlay">
+          <div class="p-client">YPF</div>
+          <div class="p-title" data-i18n="portfolio.p3">Full Pollo — IA</div>
+          <div class="p-year">2025</div>
+        </div>
+      </a>
+
+      <a class="portfolio-item"
+         style="--thumb:url('assets/p4.jpg')"
+         href="#"
+         data-type="video"
+         data-src="https://www.dropbox.com/scl/fi/4k7w5s92x03gf2cy683vs/6B-corregida-V03.mp4?rlkey=a3bz1c3tiicovmxz2gyy2bnjg&raw=1">
+        <div class="p-overlay">
+          <div class="p-client">BBVA</div>
+          <div class="p-title" data-i18n="portfolio.p4">Video promocional</div>
+          <div class="p-year">2025</div>
+        </div>
+      </a>
+
+      <a class="portfolio-item"
+         style="--thumb:url('assets/p5.jpg')"
+         href="#"
+         data-type="video"
+         data-src="https://www.dropbox.com/scl/fi/6tcgun2l39j74zq9u55b5/241216-CRUELLA-Videoclip-Master-ALTA.mov?rlkey=gmvsibr3o34hln3rwsv7g62uk&raw=1">
+        <div class="p-overlay">
+          <div class="p-client">Cruella</div>
+          <div class="p-title" data-i18n="portfolio.p5">Videoclip</div>
+          <div class="p-year">2025</div>
+        </div>
+      </a>
+
+      <a class="portfolio-item"
+         style="--thumb:url('assets/p6.jpg')"
+         href="#"
+         data-type="video"
+         data-src="https://www.dropbox.com/scl/fi/mz08qncz5up5n82mdy54u/TOMA_TEIC_01_alta-sub-espa-ol-V04.mov?rlkey=rxwhwn6u4q9mirb3xq56s6s1i&raw=1">
+        <div class="p-overlay">
+          <div class="p-client">Techint</div>
+          <div class="p-title" data-i18n="portfolio.p6">Testimoniales</div>
+          <div class="p-year">2025</div>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="portfolio-cta">
+      <a href="https://cuatroai.myportfolio.com/" target="_blank" class="btn-outline" data-i18n="portfolio.cta">Ver portfolio completo</a>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <blockquote data-i18n="manifesto.q">
+    "Cruzamos cine, diseño e inteligencia artificial para crear lo que todavía <em>no existe.</em>"
+  </blockquote>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label" data-i18n="about.label">El estudio</div>
+    <div class="about-grid">
+      <div class="about-text" data-i18n="about.text">
+        <strong>Cuatro.ai</strong> nació de la convicción de que la inteligencia artificial no reemplaza la dirección de arte — la potencia.
+        Somos un estudio boutique que combina <strong>ojo cinematográfico</strong> con las herramientas generativas más avanzadas para crear narrativas visuales que las marcas no podrían lograr de otra manera.
+      </div>
+
+      <div class="about-founders">
+        <div class="founder">
+          <h4>Julieta Wagner</h4>
+          <div class="role" data-i18n="about.j.role">Dirección de Arte</div>
+          <p data-i18n="about.j.p">Directora de arte con formación en cine y diseño. Lidera la visión creativa y estética de cada proyecto.</p>
+        </div>
+
+        <div class="founder">
+          <h4>Sabrina Korn</h4>
+          <div class="role">Creative Developer</div>
+          <p data-i18n="about.s.p">Desarrolladora creativa especializada en herramientas generativas, 3D y desarrollo técnico de piezas con IA.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contacto">
+  <div class="container">
+    <div class="section-label" data-i18n="contact.label">Hablemos</div>
+    <div class="contact-grid">
+      <div class="contact-big">
+        <a href="mailto:hola@cuatroai.ar">hola@<br>cuatroai.ar</a>
+      </div>
+
+      <div class="contact-details">
+        <div class="contact-block">
+          <h4>Julieta Wagner</h4>
+          <a href="mailto:julietawagner@cuatroai.ar">julietawagner@cuatroai.ar</a>
+          <a href="tel:+5491143996388">+54 9 11 4399 6388</a>
+        </div>
+
+        <div class="contact-block">
+          <h4>Sabrina Korn</h4>
+          <a href="mailto:sabrinakorn@cuatroai.ar">sabrinakorn@cuatroai.ar</a>
+          <a href="tel:+5491160434440">+54 9 11 6043 4440</a>
+        </div>
+
+        <div class="contact-block">
+          <h4 data-i18n="contact.follow">Seguinos</h4>
+          <div class="social-links">
+            <a href="https://cuatroai.myportfolio.com/" target="_blank">Portfolio</a>
+            <a href="https://vimeo.com/julietawagner" target="_blank">Vimeo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <p data-i18n="footer.left">© 2026 Cuatro.ai — Generative Art Direction</p>
+      <p data-i18n="footer.right">Buenos Aires, Argentina</p>
+    </div>
+  </div>
 </footer>
+
+<!-- MODAL -->
+<div class="modal" id="modal" aria-hidden="true">
+  <div class="modal-inner">
+    <button class="modal-close" id="modalClose" type="button">CERRAR</button>
+    <video class="modal-video" id="modalVideo" controls playsinline></video>
+    <img class="modal-img" id="modalImg" alt="Preview" />
+  </div>
+</div>
+
+<script>
+  // ========= HERO VIDEO =========
+  const HERO_VIDEO_URL = "https://www.dropbox.com/scl/fi/kyr4aqjpl0sugzhijeaie/REEL-20-octubre.mp4?rlkey=61wt92du260uwsgkidkyhct0m&raw=1";
+  const heroVideo = document.getElementById('heroVideo');
+  const heroSrc = document.createElement('source');
+  heroSrc.src = HERO_VIDEO_URL;
+  heroSrc.type = "video/mp4";
+  heroVideo.appendChild(heroSrc);
+  heroVideo.addEventListener('canplay', () => { heroVideo.play().catch(()=>{}); });
+
+  // ========= i18n ES/EN =========
+  const STR = {
+    es: {
+      "nav.services": "Servicios",
+      "nav.portfolio": "Portfolio",
+      "nav.about": "Nosotras",
+      "nav.contact": "Contacto",
+
+      "hero.eyebrow": "Estudio Creativo IA — Buenos Aires",
+      "hero.h1": "Creatividad<br>artificial.<br><em>Resultados reales.</em>",
+      "hero.sub": "Dirección de arte + desarrollo creativo con inteligencia artificial para publicidad, cine y contenido social.",
+      "hero.cta": "Ver portfolio <span class='arrow'></span>",
+      "hero.scroll": "Scroll",
+
+      "services.label": "Lo que hacemos",
+      "services.title": "Somos el estudio que las marcas eligen<br>cuando necesitan que la IA no parezca IA.",
+      "services.s1.h": "Dirección de Arte con IA",
+      "services.s1.p": "Campañas publicitarias, key visuals y contenido de marca con herramientas generativas bajo ojo de directora de arte.",
+      "services.s2.h": "Video & Motion",
+      "services.s2.p": "Cortos publicitarios, videoclips y piezas de motion con IA generativa. Del tratamiento creativo al producto final.",
+      "services.s3.h": "Contenido Social",
+      "services.s3.p": "Foto, video y motion para redes sociales. Producción ágil con calidad de campaña. Volumen sin sacrificar estética.",
+      "services.s4.h": "3D & Unreal Engine",
+      "services.s4.p": "Creación 3D, moodboards, tratamientos creativos con IA e integración con Unreal Engine para cine y publicidad.",
+
+      "portfolio.label": "Trabajos seleccionados",
+      "portfolio.title": "Portfolio",
+      "portfolio.cta": "Ver portfolio completo",
+      "portfolio.p1": "Corto publicitario \"Invisible\"",
+      "portfolio.p2": "Loop generativo",
+      "portfolio.p3": "Full Pollo — IA",
+      "portfolio.p4": "Video promocional",
+      "portfolio.p5": "Videoclip",
+      "portfolio.p6": "Testimoniales",
+
+      "manifesto.q": "\"Cruzamos cine, diseño e inteligencia artificial para crear lo que todavía <em>no existe.</em>\"",
+
+      "about.label": "El estudio",
+      "about.text": "<strong>Cuatro.ai</strong> nació de la convicción de que la inteligencia artificial no reemplaza la dirección de arte — la potencia. Somos un estudio boutique que combina <strong>ojo cinematográfico</strong> con las herramientas generativas más avanzadas para crear narrativas visuales que las marcas no podrían lograr de otra manera.",
+      "about.j.role": "Dirección de Arte",
+      "about.j.p": "Directora de arte con formación en cine y diseño. Lidera la visión creativa y estética de cada proyecto.",
+      "about.s.p": "Desarrolladora creativa especializada en herramientas generativas, 3D y desarrollo técnico de piezas con IA.",
+
+      "contact.label": "Hablemos",
+      "contact.follow": "Seguinos",
+
+      "footer.left": "© 2026 Cuatro.ai — Generative Art Direction",
+      "footer.right": "Buenos Aires, Argentina"
+    },
+
+    en: {
+      "nav.services": "Services",
+      "nav.portfolio": "Portfolio",
+      "nav.about": "About",
+      "nav.contact": "Contact",
+
+      "hero.eyebrow": "AI Creative Studio — Buenos Aires",
+      "hero.h1": "Artificial<br>creativity.<br><em>Real results.</em>",
+      "hero.sub": "Art direction + creative development with AI for advertising, film and social content.",
+      "hero.cta": "View portfolio <span class='arrow'></span>",
+      "hero.scroll": "Scroll",
+
+      "services.label": "What we do",
+      "services.title": "We’re the studio brands choose<br>when they need AI that doesn’t look like AI.",
+      "services.s1.h": "AI Art Direction",
+      "services.s1.p": "Campaigns, key visuals and brand content using generative tools guided by strong art direction.",
+      "services.s2.h": "Video & Motion",
+      "services.s2.p": "Commercials, music videos and motion pieces with generative AI. From creative treatment to final delivery.",
+      "services.s3.h": "Social Content",
+      "services.s3.p": "Photo, video and motion for social. Fast production with campaign-level craft. Volume without losing aesthetics.",
+      "services.s4.h": "3D & Unreal Engine",
+      "services.s4.p": "3D creation, moodboards, AI creative treatments and Unreal Engine integration for film and advertising.",
+
+      "portfolio.label": "Selected work",
+      "portfolio.title": "Portfolio",
+      "portfolio.cta": "View full portfolio",
+      "portfolio.p1": "Commercial short \"Invisible\"",
+      "portfolio.p2": "Generative loop",
+      "portfolio.p3": "Full Pollo — AI",
+      "portfolio.p4": "Promotional video",
+      "portfolio.p5": "Music video",
+      "portfolio.p6": "Testimonials",
+
+      "manifesto.q": "\"We blend film, design and artificial intelligence to create what <em>doesn’t exist yet.</em>\"",
+
+      "about.label": "The studio",
+      "about.text": "<strong>Cuatro.ai</strong> was born from the belief that AI doesn’t replace art direction — it amplifies it. We’re a boutique studio combining a <strong>cinematic eye</strong> with advanced generative tools to craft visual narratives brands can’t achieve otherwise.",
+      "about.j.role": "Art Direction",
+      "about.j.p": "Art director with a background in film and design. Leads the creative vision and aesthetic of each project.",
+      "about.s.p": "Creative developer focused on generative tools, 3D and technical execution for AI-driven pieces.",
+
+      "contact.label": "Let’s talk",
+      "contact.follow": "Follow",
+
+      "footer.left": "© 2026 Cuatro.ai — Generative Art Direction",
+      "footer.right": "Buenos Aires, Argentina"
+    }
+  };
+
+  let lang = (navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en";
+
+  function setLang(newLang) {
+    lang = newLang;
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      const val = STR[lang][key];
+      if (val !== undefined) el.innerHTML = val;
+    });
+
+    document.getElementById("langToggle").textContent = (lang === "es") ? "ES / EN" : "EN / ES";
+  }
+
+  document.getElementById("langToggle").addEventListener("click", () => {
+    setLang(lang === "es" ? "en" : "es");
+  });
+
+  setLang(lang);
+
+  // ========= MODAL PLAYER =========
+  const modal = document.getElementById('modal');
+  const modalClose = document.getElementById('modalClose');
+  const modalVideo = document.getElementById('modalVideo');
+  const modalImg = document.getElementById('modalImg');
+
+  function openModal(type, src){
+    modal.classList.add('open');
+    modal.setAttribute('aria-hidden','false');
+
+    // Reset
+    modalVideo.pause();
+    modalVideo.removeAttribute('src');
+    modalVideo.load();
+    modalVideo.style.display = 'none';
+
+    modalImg.removeAttribute('src');
+    modalImg.style.display = 'none';
+
+    if(type === 'video'){
+      modalVideo.style.display = 'block';
+      modalVideo.src = src;
+      modalVideo.play().catch(()=>{});
+    } else {
+      modalImg.style.display = 'block';
+      modalImg.src = src;
+    }
+  }
+
+  function closeModal(){
+    modal.classList.remove('open');
+    modal.setAttribute('aria-hidden','true');
+    modalVideo.pause();
+    modalVideo.removeAttribute('src');
+    modalVideo.load();
+    modalImg.removeAttribute('src');
+  }
+
+  document.querySelectorAll('.portfolio-item').forEach(item=>{
+    item.addEventListener('click', (e)=>{
+      e.preventDefault();
+      const type = item.getAttribute('data-type');
+      const src = item.getAttribute('data-src');
+      openModal(type, src);
+    });
+  });
+
+  modalClose.addEventListener('click', closeModal);
+  modal.addEventListener('click', (e)=>{
+    if(e.target === modal) closeModal();
+  });
+  document.addEventListener('keydown', (e)=>{
+    if(e.key === 'Escape') closeModal();
+  });
+</script>
 
 </body>
 </html>
+
 
 
 
