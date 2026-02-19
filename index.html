@@ -447,6 +447,13 @@
   }
 
   .portfolio-item:hover .p-overlay { opacity: 1; }
+/* ===== MOBILE: mostrar info en portfolio (touch) ===== */
+@media (hover: none) and (pointer: coarse) {
+  .portfolio-item .p-overlay {
+    opacity: 1;
+    background: rgba(0,0,0,0.35);
+  }
+}
 
   .portfolio-item .p-title {
     font-family: 'Syne', sans-serif;
