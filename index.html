@@ -702,7 +702,16 @@
   @media (max-width: 768px) {
     nav { padding: 1rem 1.5rem; }
     .nav-links { display: none; }
-    .hero { padding: 3rem 1.5rem; min-height: 620px; }
+    .hero {
+  padding: 2rem 1.25rem;
+  min-height: auto;
+}
+    .hero h1 {
+  font-size: clamp(40px, 10vw, 72px);
+  line-height: 0.95;
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
     .container { padding: 0 1.5rem; }
     .services-grid { grid-template-columns: 1fr; }
     .portfolio-grid { grid-template-columns: 1fr 1fr; }
