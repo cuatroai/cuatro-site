@@ -433,18 +433,21 @@
   }
 
   /* Overlay */
-  .portfolio-item .p-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0,0,0,0.55);
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    padding: 1.5rem;
-    opacity: 0;
-    transition: opacity 0.4s;
-    z-index: 2;
-  }
+ .portfolio-item .p-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between; /* <- antes flex-end */
+  align-items: flex-start;
+  padding: 1.5rem;
+  gap: 0.35rem;
+  opacity: 0;
+  transition: opacity 0.4s;
+  z-index: 2;
+}
+
 
   .portfolio-item:hover .p-overlay { opacity: 1; }
 /* ===== MOBILE: mostrar info en portfolio (touch) ===== */
@@ -476,7 +479,6 @@
   text-transform: uppercase;
   color: var(--accent);
   font-weight: 500;
-  margin-bottom: auto;
 }
 
 
