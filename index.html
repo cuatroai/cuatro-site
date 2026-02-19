@@ -1,242 +1,1094 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Cuatro.ai — Estudio creativo IA</title>
-  <meta name="description" content="Cuatro.ai — Estudio creativo IA de Julieta Wagner y Sabrina Korn. Dirección de arte generativa, video con IA y producción audiovisual." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&display=swap" rel="stylesheet">
-  <style>
-    :root{ --bg:#000; --fg:#fff; --muted:#bdbdbd; --border:#222; --max:1400px }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0; font-family:'Space Grotesk',system-ui,-apple-system,Segoe UI,Roboto,Helvetica,Arial,sans-serif;
-      background:var(--bg); color:var(--fg)
-    }
-    a{color:inherit; text-decoration:none}
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cuatro.ai — Estudio Creativo IA</title>
 
-    /* Contenedor con padding responsivo y ancho cómodo */
-    .container{max-width:var(--max); margin:0 auto; padding:0 clamp(24px,6vw,80px)}
-    .narrow{max-width:1100px; margin:0 auto} /* centra textos largos */
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Syne:wght@400;500;600;700;800&display=swap');
 
-    /* Top bar */
-    .top{position:fixed; inset:0 0 auto 0; z-index:40; background:linear-gradient(180deg, rgba(0,0,0,.65), rgba(0,0,0,0));}
-    .nav{display:flex; align-items:center; justify-content:space-between; padding:18px 0}
-    .logo-img{height:26px; filter:invert(1) brightness(190%);}
-    .lang{padding:6px 10px; border:1px solid #fff; border-radius:999px; font-size:.9rem; background:rgba(0,0,0,.4)}
+  :root {
+    --black: #000;
+    --near-black: #080808;
+    --dark: #111;
+    --charcoal: #1a1a1a;
+    --mid: #333;
+    --grey: #666;
+    --silver: #999;
+    --light: #ccc;
+    --off-white: #e8e8e4;
+    --white: #f5f5f0;
+    --cream: #fafaf6;
+    --accent: #ff4d00;
+  }
 
-    /* HERO */
-    .hero{position:relative; height:100vh; overflow:hidden}
-    .hero video{position:absolute; inset:0; width:100%; height:100%; object-fit:cover; filter:contrast(105%) saturate(102%) brightness(.92)}
-    .hero .veil{position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,0,0,.45), rgba(0,0,0,.25) 40%, rgba(0,0,0,.75));}
+  * { margin: 0; padding: 0; box-sizing: border-box; }
 
-    /* Title centrado y con safe padding */
-    .hero .title{
-      position:absolute; inset:auto 0 10vh 0; text-align:center;
-      padding:0 clamp(24px, 6vw, 80px);
-    }
-    .hero h1{
-      font-size:clamp(42px, 9vw, 96px);
-      line-height:0.92; margin:0 auto; max-width:900px; font-weight:700; letter-spacing:.4px;
-    }
+  html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+    scrollbar-width: thin;
+    scrollbar-color: var(--mid) var(--black);
+  }
 
-    .soundbtn{
-      position:absolute; right:18px; bottom:18vh; display:inline-flex; align-items:center; gap:8px;
-      padding:10px 12px; border-radius:999px; border:1px solid rgba(255,255,255,.7);
-      background:rgba(0,0,0,.35); color:#fff; font-weight:600; cursor:pointer
-    }
+  body {
+    background: var(--black);
+    color: var(--off-white);
+    font-family: 'Instrument Sans', -apple-system, sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+  }
 
-    /* Sections */
-    .section{padding:72px 0}
-    h2{font-size:14px; letter-spacing:.24em; text-transform:uppercase; color:#cfcfcf; margin:0 0 24px}
+  ::selection {
+    background: var(--accent);
+    color: var(--black);
+  }
 
-    /* CTA portfolio */
-    .cta-wrap{display:flex; justify-content:center}
-    .cta{display:inline-flex; align-items:center; gap:10px; padding:14px 22px; border:1px solid #fff; border-radius:999px; font-weight:700}
-    .cta:hover{background:#fff; color:#000}
+  a { color: inherit; text-decoration: none; }
 
-    /* Contact */
-    #contact p, #contact a{font-size:0.9rem; color:#dcdcdc}
-    #contact a:hover{opacity:.85}
+  /* ===== NAV ===== */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.5rem 3rem;
+    mix-blend-mode: difference;
+  }
 
-    /* Footer */
-    footer{border-top:1px solid var(--border); padding:36px 0 70px; color:#cfcfcf; font-size:0.8rem; text-align:center}
-  </style>
+  .nav-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 1.3rem;
+    letter-spacing: -0.02em;
+  }
+
+  .nav-logo span { color: var(--accent); }
+
+  .nav-links {
+    display: flex;
+    gap: 2.5rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 500;
+    opacity: 0.7;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  .lang-toggle {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    border: 1px solid rgba(255,255,255,0.3);
+    padding: 0.3rem 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s;
+    user-select: none;
+  }
+
+  .lang-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 4rem 3rem;
+    overflow: hidden;
+  }
+
+  /* Video real en el hero */
+  .hero-video {
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: 0;
+    filter: contrast(105%) saturate(102%) brightness(.85);
+    background: #000;
+  }
+
+  /* Fallback visual (si el video tarda): leve glow */
+  .hero-video-fallback {
+    position: absolute;
+    inset: 0;
+    background: var(--black);
+    z-index: 0;
+    pointer-events: none;
+  }
+  .hero-video-fallback::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse at 30% 50%, rgba(255,77,0,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse at 70% 30%, rgba(100,100,255,0.04) 0%, transparent 50%),
+      radial-gradient(ellipse at 50% 80%, rgba(255,77,0,0.03) 0%, transparent 40%);
+    animation: heroGlow 8s ease-in-out infinite alternate;
+  }
+  @keyframes heroGlow {
+    0% { opacity: 0.5; transform: scale(1); }
+    100% { opacity: 1; transform: scale(1.05); }
+  }
+
+  .hero-gradient {
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(to top, var(--black), transparent);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 900px;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.3s ease forwards;
+  }
+
+  .hero h1 {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(3rem, 7vw, 6.5rem);
+    font-weight: 800;
+    line-height: 0.92;
+    letter-spacing: -0.03em;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.5s ease forwards;
+  }
+
+  .hero h1 em { font-style: italic; color: var(--accent); }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-size: 1.1rem;
+    color: var(--silver);
+    max-width: 520px;
+    line-height: 1.7;
+    font-weight: 400;
+    opacity: 0;
+    animation: fadeUp 0.8s 0.7s ease forwards;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.8rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    color: var(--off-white);
+    opacity: 0;
+    animation: fadeUp 0.8s 0.9s ease forwards;
+    transition: color 0.3s;
+  }
+  .hero-cta:hover { color: var(--accent); }
+
+  .hero-cta .arrow {
+    width: 2.5rem;
+    height: 1px;
+    background: currentColor;
+    position: relative;
+    transition: width 0.3s;
+  }
+  .hero-cta:hover .arrow { width: 3.5rem; }
+
+  .hero-cta .arrow::after {
+    content: '';
+    position: absolute;
+    right: 0; top: -3px;
+    width: 8px; height: 8px;
+    border-right: 1px solid currentColor;
+    border-top: 1px solid currentColor;
+    transform: rotate(45deg);
+  }
+
+  /* Botón sonido (sutil) */
+  .sound-toggle {
+    position: absolute;
+    right: 3rem;
+    bottom: 2.2rem;
+    z-index: 2;
+    border: 1px solid rgba(255,255,255,0.25);
+    padding: 0.45rem 0.8rem;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.8);
+    background: rgba(0,0,0,0.2);
+    backdrop-filter: blur(6px);
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+  .sound-toggle:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2rem;
+    right: 3rem;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0;
+    animation: fadeUp 0.8s 1.2s ease forwards;
+  }
+
+  .scroll-hint span {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--grey);
+    writing-mode: vertical-rl;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: var(--mid);
+    position: relative;
+    overflow: hidden;
+  }
+
+  .scroll-line::after {
+    content: '';
+    position: absolute;
+    top: -100%;
+    width: 100%;
+    height: 100%;
+    background: var(--accent);
+    animation: scrollDown 2s infinite;
+  }
+
+  @keyframes scrollDown {
+    0% { top: -100%; }
+    100% { top: 100%; }
+  }
+
+  /* ===== SECTION COMMON ===== */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 3rem;
+  }
+
+  section { padding: 8rem 0; }
+
+  .section-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: var(--grey);
+    font-weight: 600;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(255,255,255,0.08);
+  }
+
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.02em;
+    margin-bottom: 2rem;
+  }
+
+  /* ===== CLIENTS / SOCIAL PROOF ===== */
+  .clients {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+    padding: 3rem 0;
+    overflow: hidden;
+  }
+
+  .clients-track {
+    display: flex;
+    gap: 4rem;
+    align-items: center;
+    animation: marquee 25s linear infinite;
+    white-space: nowrap;
+  }
+
+  .clients-track .client-name {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--mid);
+    flex-shrink: 0;
+    transition: color 0.3s;
+  }
+
+  .clients-track .client-name:hover { color: var(--off-white); }
+
+  .clients-track .dot {
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background: var(--mid);
+    flex-shrink: 0;
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  /* ===== SERVICES ===== */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1px;
+    background: rgba(255,255,255,0.06);
+    margin-top: 2rem;
+  }
+
+  .service-card {
+    background: var(--near-black);
+    padding: 3rem;
+    position: relative;
+    transition: background 0.4s;
+    cursor: default;
+  }
+
+  .service-card:hover { background: var(--charcoal); }
+
+  .service-number {
+    font-family: 'Syne', sans-serif;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-card h3 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-bottom: 1rem;
+  }
+
+  .service-card p {
+    font-size: 0.88rem;
+    color: var(--silver);
+    line-height: 1.7;
+    max-width: 340px;
+  }
+
+  /* ===== PORTFOLIO GRID ===== */
+  .portfolio-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+    margin-top: 2rem;
+  }
+
+  .portfolio-item {
+    position: relative;
+    aspect-ratio: 16/10;
+    background: var(--charcoal);
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .portfolio-item .p-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 1.5rem;
+    opacity: 0;
+    transition: opacity 0.4s;
+  }
+
+  .portfolio-item:hover .p-overlay { opacity: 1; }
+
+  .portfolio-item .p-title {
+    font-family: 'Syne', sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .portfolio-item .p-client {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .portfolio-item .p-year { font-size: 0.7rem; color: var(--grey); }
+
+  /* Placeholder colors for portfolio items */
+  .portfolio-item:nth-child(1) { background: linear-gradient(135deg, #1a1a2e, #16213e); }
+  .portfolio-item:nth-child(2) { background: linear-gradient(135deg, #1a1a1a, #2d1b00); }
+  .portfolio-item:nth-child(3) { background: linear-gradient(135deg, #0d1117, #161b22); }
+  .portfolio-item:nth-child(4) { background: linear-gradient(135deg, #1c1c1c, #2a0a0a); }
+  .portfolio-item:nth-child(5) { background: linear-gradient(135deg, #111, #1a1a2e); }
+  .portfolio-item:nth-child(6) { background: linear-gradient(135deg, #0f0f0f, #1a2a1a); }
+
+  .portfolio-cta { margin-top: 3rem; text-align: center; }
+
+  .btn-outline {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    border: 1px solid rgba(255,255,255,0.2);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.3s;
+  }
+
+  .btn-outline:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ===== ABOUT ===== */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 6rem;
+    align-items: start;
+  }
+
+  .about-text {
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: var(--light);
+    font-weight: 400;
+  }
+
+  .about-text strong { color: var(--off-white); font-weight: 600; }
+
+  .about-founders {
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+  }
+
+  .founder {
+    padding-left: 1.5rem;
+    border-left: 2px solid var(--accent);
+  }
+
+  .founder h4 {
+    font-family: 'Syne', sans-serif;
+    font-size: 1.1rem;
+    font-weight: 700;
+    margin-bottom: 0.3rem;
+  }
+
+  .founder .role {
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 0.5rem;
+  }
+
+  .founder p {
+    font-size: 0.85rem;
+    color: var(--silver);
+    line-height: 1.6;
+  }
+
+  /* ===== MANIFESTO ===== */
+  .manifesto {
+    text-align: center;
+    padding: 10rem 3rem;
+    position: relative;
+  }
+
+  .manifesto::before {
+    content: '4';
+    font-family: 'Syne', sans-serif;
+    font-size: 30rem;
+    font-weight: 800;
+    color: rgba(255,77,0,0.03);
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+
+  .manifesto blockquote {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(1.8rem, 3.5vw, 3rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+  }
+
+  .manifesto blockquote em { font-style: italic; color: var(--accent); }
+
+  /* ===== CONTACT ===== */
+  .contact-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr;
+    gap: 4rem;
+  }
+
+  .contact-big {
+    font-family: 'Syne', sans-serif;
+    font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+  }
+
+  .contact-big a { display: block; transition: color 0.3s; }
+  .contact-big a:hover { color: var(--accent); }
+
+  .contact-details {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-top: 0.5rem;
+  }
+
+  .contact-block h4 {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--grey);
+    font-weight: 600;
+    margin-bottom: 0.8rem;
+  }
+
+  .contact-block p, .contact-block a {
+    font-size: 0.9rem;
+    color: var(--silver);
+    line-height: 1.8;
+    display: block;
+    transition: color 0.3s;
+  }
+
+  .contact-block a:hover { color: var(--off-white); }
+
+  .social-links {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 0.5rem;
+  }
+
+  .social-links a {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-weight: 500;
+    color: var(--grey);
+    transition: color 0.3s;
+  }
+  .social-links a:hover { color: var(--accent); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    border-top: 1px solid rgba(255,255,255,0.06);
+    padding: 2rem 0;
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  footer p {
+    font-size: 0.65rem;
+    color: var(--mid);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ===== ANIMATIONS ===== */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 768px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hero { padding: 3rem 1.5rem; min-height: 620px; }
+    .container { padding: 0 1.5rem; }
+    .services-grid { grid-template-columns: 1fr; }
+    .portfolio-grid { grid-template-columns: 1fr 1fr; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; }
+    .manifesto { padding: 6rem 1.5rem; }
+    .scroll-hint { display: none; }
+    .sound-toggle { right: 1.5rem; }
+  }
+</style>
 </head>
 
 <body>
-  <!-- TOP NAV -->
-  <div class="top">
-    <div class="container nav">
-      <a id="langBtn" class="lang" href="#" aria-label="Cambiar idioma">EN</a>
-    </div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">cuatro<span>.</span>ai</div>
+  <ul class="nav-links">
+    <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#portfolio" data-i18n="nav.portfolio">Portfolio</a></li>
+    <li><a href="#about" data-i18n="nav.about">Nosotras</a></li>
+    <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+  </ul>
+  <div class="lang-toggle" id="langToggle">ES / EN</div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <!-- Video (Dropbox raw=1) -->
+  <video id="heroVideo" class="hero-video" autoplay muted loop playsinline preload="metadata"></video>
+  <div class="hero-video-fallback" aria-hidden="true"></div>
+
+  <div class="hero-gradient"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Estudio Creativo IA — Buenos Aires</div>
+    <h1 data-i18n="hero.h1">Creatividad<br>artificial.<br><em>Resultados reales.</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">
+      Dirección de arte + desarrollo creativo con inteligencia artificial para publicidad, cine y contenido social.
+    </p>
+    <a href="#portfolio" class="hero-cta" data-i18n="hero.cta">
+      Ver portfolio <span class="arrow"></span>
+    </a>
   </div>
 
-  <!-- HERO FULLSCREEN VIDEO -->
-  <section class="hero" aria-label="Reel">
-    <video id="heroVideo" autoplay muted loop playsinline poster="assets/hero-poster.jpg" preload="metadata">
-      <source src="https://www.dropbox.com/scl/fi/nomz9ll0g56vcoz3qpcbp/REEL-Octubree-2025-con-t-tulos.mp4?rlkey=dbv9xs3wouiby0vmwp9pj9srw&raw=1" type="video/mp4" />
-    </video>
-    <div class="veil" aria-hidden="true"></div>
-    <div class="title">
-      <h1 data-i18n="hero.title">Estudio creativo IA</h1>
+  <button class="sound-toggle" id="soundToggle" type="button" data-i18n="hero.soundOff">Sonido OFF</button>
+
+  <div class="scroll-hint">
+    <span data-i18n="hero.scroll">Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- CLIENTS MARQUEE -->
+<div class="clients">
+  <div class="clients-track">
+    <span class="client-name">YPF</span><span class="dot"></span>
+    <span class="client-name">BBVA</span><span class="dot"></span>
+    <span class="client-name">Jumex</span><span class="dot"></span>
+    <span class="client-name">Techint</span><span class="dot"></span>
+    <span class="client-name">Natura</span><span class="dot"></span>
+    <span class="client-name">Corona</span><span class="dot"></span>
+    <span class="client-name">Sedal</span><span class="dot"></span>
+    <span class="client-name">Tienda Inglesa</span><span class="dot"></span>
+    <span class="client-name">Donnaluna</span><span class="dot"></span>
+    <span class="client-name">Kongo</span><span class="dot"></span>
+    <!-- Duplicate for seamless loop -->
+    <span class="client-name">YPF</span><span class="dot"></span>
+    <span class="client-name">BBVA</span><span class="dot"></span>
+    <span class="client-name">Jumex</span><span class="dot"></span>
+    <span class="client-name">Techint</span><span class="dot"></span>
+    <span class="client-name">Natura</span><span class="dot"></span>
+    <span class="client-name">Corona</span><span class="dot"></span>
+    <span class="client-name">Sedal</span><span class="dot"></span>
+    <span class="client-name">Tienda Inglesa</span><span class="dot"></span>
+    <span class="client-name">Donnaluna</span><span class="dot"></span>
+    <span class="client-name">Kongo</span><span class="dot"></span>
+  </div>
+</div>
+
+<!-- SERVICES -->
+<section id="servicios">
+  <div class="container">
+    <div class="section-label" data-i18n="services.label">Lo que hacemos</div>
+    <h2 class="section-title" data-i18n="services.title">
+      Somos el estudio que las marcas eligen<br>cuando necesitan que la IA no parezca IA.
+    </h2>
+
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-number">01</div>
+        <h3 data-i18n="services.s1.h">Dirección de Arte con IA</h3>
+        <p data-i18n="services.s1.p">Campañas publicitarias, key visuals y contenido de marca con herramientas generativas bajo ojo de directora de arte.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">02</div>
+        <h3 data-i18n="services.s2.h">Video & Motion</h3>
+        <p data-i18n="services.s2.p">Cortos publicitarios, videoclips y piezas de motion con IA generativa. Del tratamiento creativo al producto final.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">03</div>
+        <h3 data-i18n="services.s3.h">Contenido Social</h3>
+        <p data-i18n="services.s3.p">Foto, video y motion para redes sociales. Producción ágil con calidad de campaña. Volumen sin sacrificar estética.</p>
+      </div>
+
+      <div class="service-card">
+        <div class="service-number">04</div>
+        <h3 data-i18n="services.s4.h">3D & Unreal Engine</h3>
+        <p data-i18n="services.s4.p">Creación 3D, moodboards, tratamientos creativos con IA e integración con Unreal Engine para cine y publicidad.</p>
+      </div>
     </div>
-    <button id="soundBtn" class="soundbtn" aria-label="Toggle sound"><span id="soundLabel">Sonido apagado</span></button>
-  </section>
+  </div>
+</section>
 
-  <!-- MAIN CONTENT -->
-  <main>
-    <!-- CTA PORTFOLIO -->
-    <section class="section container" id="portfolio" style="text-align:center;">
-      <h2 data-i18n="portfolio.title">Portfolio</h2>
-      <div class="cta-wrap" style="justify-content:center;">
-        <a class="cta" href="https://cuatroai.myportfolio.com/" target="_blank" rel="noopener" data-i18n="portfolio.cta">Ver portfolio completo</a>
+<!-- PORTFOLIO -->
+<section id="portfolio">
+  <div class="container">
+    <div class="section-label" data-i18n="portfolio.label">Trabajos seleccionados</div>
+    <h2 class="section-title" data-i18n="portfolio.title">Portfolio</h2>
+
+    <div class="portfolio-grid">
+      <div class="portfolio-item">
+        <div class="p-overlay">
+          <div class="p-client">Tienda Inglesa</div>
+          <div class="p-title" data-i18n="portfolio.p1">Corto publicitario "Invisible"</div>
+          <div class="p-year">2026</div>
+        </div>
       </div>
-    </section>
 
-    <!-- ABOUT -->
-    <section id="about" class="section container">
-      <div class="narrow">
-        <h2 data-i18n="about.title">Equipo</h2>
-        <p data-i18n="about.text">
-          Estudio creativo formado por Julieta Wagner (Dirección de Arte) y Sabrina Korn (Creative Developer). Cruzamos cine, diseño e inteligencia artificial para crear narrativas visuales innovadoras.
-        </p>
+      <div class="portfolio-item">
+        <div class="p-overlay">
+          <div class="p-client">Jumex</div>
+          <div class="p-title" data-i18n="portfolio.p2">Tratamiento creativo con IA</div>
+          <div class="p-year">2025</div>
+        </div>
       </div>
-    </section>
 
-    <!-- CONTACT -->
-    <section id="contact" class="section container">
-      <div class="narrow">
-        <h2 data-i18n="contact.title">Contacto</h2>
-        <p>
-          <a href="mailto:julietawagner@cuatroai.ar">julietawagner@cuatroai.ar</a> ·
-          <a href="mailto:sabrinakorn@cuatroai.ar">sabrinakorn@cuatroai.ar</a> ·
-          <a href="mailto:hola@cuatroai.ar">hola@cuatroai.ar</a>
-        </p>
-        <p>
-          <a href="tel:+5491143996388">+54 9 11 4399 6388</a> — Julieta Wagner<br>
-          <a href="tel:+5491160434440">+54 9 11 6043 4440</a> — Sabrina Korn (Creative Developer)
-        </p>
-        <p>
-          <a href="https://cuatroai.myportfolio.com/" target="_blank" rel="noopener">Portfolio</a> ·
-          <a href="https://vimeo.com/julietawagner" target="_blank" rel="noopener">Vimeo</a>
-        </p>
+      <div class="portfolio-item">
+        <div class="p-overlay">
+          <div class="p-client">YPF</div>
+          <div class="p-title" data-i18n="portfolio.p3">RRSS YPF Full</div>
+          <div class="p-year">2025</div>
+        </div>
       </div>
-    </section>
-  </main>
 
-  <!-- FOOTER -->
-  <footer>
-    <div class="container">
-      <small>© 2025 Cuatro.ai — Generative Art Direction</small>
+      <div class="portfolio-item">
+        <div class="p-overlay">
+          <div class="p-client">BBVA</div>
+          <div class="p-title" data-i18n="portfolio.p4">Video promocional</div>
+          <div class="p-year">2025</div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="p-overlay">
+          <div class="p-client">Della</div>
+          <div class="p-title" data-i18n="portfolio.p5">Videoclip "Cruella"</div>
+          <div class="p-year">2025</div>
+        </div>
+      </div>
+
+      <div class="portfolio-item">
+        <div class="p-overlay">
+          <div class="p-client">Techint</div>
+          <div class="p-title" data-i18n="portfolio.p6">Videos testimoniales</div>
+          <div class="p-year">2025</div>
+        </div>
+      </div>
     </div>
-  </footer>
 
-  <!-- SCRIPT -->
-  <script>
-    /* Diccionario i18n */
-    const STR = {
-      es: {
-        'hero.title': 'ESTUDIO CREATIVO IA',
-        'portfolio.title': 'Portfolio',
-        'portfolio.cta': 'Ver portfolio completo',
-        'about.title': 'Equipo',
-        'about.text': 'Estudio creativo formado por Julieta Wagner (Dirección de Arte) y Sabrina Korn (Creative Developer). Cruzamos cine, diseño e inteligencia artificial para crear narrativas visuales innovadoras.',
-        'contact.title': 'Contacto',
-        'ui.sound_on': 'Sonido encendido',
-        'ui.sound_off': 'Sonido apagado'
-      },
-      en: {
-        'hero.title': 'CREATIVE STUDIO AI',
-        'portfolio.title': 'Portfolio',
-        'portfolio.cta': 'View full portfolio',
-        'about.title': 'About',
-        'about.text': 'Creative studio founded by Julieta Wagner (Art Direction) and Sabrina Korn (Creative Developer). We blend film, design and AI to craft bold and innovative visual narratives.',
-        'contact.title': 'Contact',
-        'ui.sound_on': 'Sound on',
-        'ui.sound_off': 'Sound off'
-      }
-    };
+    <div class="portfolio-cta">
+      <a href="https://cuatroai.myportfolio.com/" target="_blank" class="btn-outline" data-i18n="portfolio.cta">Ver portfolio completo</a>
+    </div>
+  </div>
+</section>
 
-    /* Estado de idioma */
-    let lang = (localStorage.getItem('cuatro_lang')) || (navigator.language?.startsWith('es') ? 'es' : 'en');
+<!-- MANIFESTO -->
+<section class="manifesto">
+  <blockquote data-i18n="manifesto.q">
+    "Cruzamos cine, diseño e inteligencia artificial para crear lo que todavía <em>no existe.</em>"
+  </blockquote>
+</section>
 
-    function setLang(l) {
-      lang = l;
-      localStorage.setItem('cuatro_lang', l);
-      document.documentElement.lang = l;
+<!-- ABOUT -->
+<section id="about">
+  <div class="container">
+    <div class="section-label" data-i18n="about.label">El estudio</div>
+    <div class="about-grid">
+      <div class="about-text" data-i18n="about.text">
+        <strong>Cuatro.ai</strong> nació de la convicción de que la inteligencia artificial no reemplaza la dirección de arte — la potencia.
+        Somos un estudio boutique que combina <strong>ojo cinematográfico</strong> con las herramientas generativas más avanzadas para crear narrativas visuales que las marcas no podrían lograr de otra manera.
+      </div>
 
-      // Title y description por idioma
-      document.title = l === 'es'
-        ? 'Cuatro.ai — Estudio creativo IA'
-        : 'Cuatro.ai — Generative Art Direction';
+      <div class="about-founders">
+        <div class="founder">
+          <h4>Julieta Wagner</h4>
+          <div class="role" data-i18n="about.j.role">Dirección de Arte</div>
+          <p data-i18n="about.j.p">Directora de arte con formación en cine y diseño. Lidera la visión creativa y estética de cada proyecto.</p>
+        </div>
 
-      document.querySelector('meta[name="description"]').setAttribute('content',
-        l === 'es'
-          ? 'Cuatro.ai — Estudio creativo IA de Julieta Wagner y Sabrina Korn. Dirección de arte generativa, video con IA y producción audiovisual.'
-          : 'Cuatro.ai — Creative studio by Julieta Wagner and Sabrina Korn. Generative art direction, AI-driven film and audiovisual production.'
-      );
+        <div class="founder">
+          <h4>Sabrina Korn</h4>
+          <div class="role">Creative Developer</div>
+          <p data-i18n="about.s.p">Desarrolladora creativa especializada en herramientas generativas, 3D y desarrollo técnico de piezas con IA.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-      // Reemplazo de textos marcados con data-i18n
-      document.querySelectorAll('[data-i18n]').forEach(el => {
-        const k = el.getAttribute('data-i18n');
-        if (STR[l] && STR[l][k] !== undefined) {
-          // Si el elemento es un botón/enlace, usamos textContent
-          if (el.tagName === 'A' || el.tagName === 'BUTTON' || el.tagName === 'H1' || el.tagName === 'H2') {
-            el.textContent = STR[l][k];
-          } else {
-            el.innerHTML = STR[l][k];
-          }
-        }
-      });
+<!-- CONTACT -->
+<section id="contacto">
+  <div class="container">
+    <div class="section-label" data-i18n="contact.label">Hablemos</div>
+    <div class="contact-grid">
+      <div class="contact-big">
+        <a href="mailto:hola@cuatroai.ar">hola@<br>cuatroai.ar</a>
+      </div>
 
-      // Botón de idioma
-      const langBtn = document.getElementById('langBtn');
-      if (langBtn) langBtn.textContent = l === 'en' ? 'ES' : 'EN';
+      <div class="contact-details">
+        <div class="contact-block">
+          <h4>Julieta Wagner</h4>
+          <a href="mailto:julietawagner@cuatroai.ar">julietawagner@cuatroai.ar</a>
+          <a href="tel:+5491143996388">+54 9 11 4399 6388</a>
+        </div>
 
-      // Actualizamos etiqueta de sonido al idioma activo
-      syncSoundLabel();
+        <div class="contact-block">
+          <h4>Sabrina Korn</h4>
+          <a href="mailto:sabrinakorn@cuatroai.ar">sabrinakorn@cuatroai.ar</a>
+          <a href="tel:+5491160434440">+54 9 11 6043 4440</a>
+        </div>
+
+        <div class="contact-block">
+          <h4 data-i18n="contact.follow">Seguinos</h4>
+          <div class="social-links">
+            <a href="https://cuatroai.myportfolio.com/" target="_blank">Portfolio</a>
+            <a href="https://vimeo.com/julietawagner" target="_blank">Vimeo</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="container">
+    <div class="footer-inner">
+      <p data-i18n="footer.left">© 2026 Cuatro.ai — Generative Art Direction</p>
+      <p data-i18n="footer.right">Buenos Aires, Argentina</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ========= 1) HERO VIDEO SOURCE =========
+  // Tu video nuevo (Dropbox) con raw=1:
+  const HERO_VIDEO_URL = "https://www.dropbox.com/scl/fi/kyr4aqjpl0sugzhijeaie/REEL-20-octubre.mp4?rlkey=61wt92du260uwsgkidkyhct0m&raw=1";
+
+  const heroVideo = document.getElementById('heroVideo');
+  const src = document.createElement('source');
+  src.src = HERO_VIDEO_URL;
+  src.type = "video/mp4";
+  heroVideo.appendChild(src);
+
+  // iOS/Safari: a veces necesita play() explícito
+  heroVideo.addEventListener('canplay', () => {
+    heroVideo.play().catch(()=>{});
+  });
+
+  // ========= 2) i18n ES/EN (TODO el sitio) =========
+  const STR = {
+    es: {
+      "nav.services": "Servicios",
+      "nav.portfolio": "Portfolio",
+      "nav.about": "Nosotras",
+      "nav.contact": "Contacto",
+
+      "hero.eyebrow": "Estudio Creativo IA — Buenos Aires",
+      "hero.h1": "Creatividad<br>artificial.<br><em>Resultados reales.</em>",
+      "hero.sub": "Dirección de arte + desarrollo creativo con inteligencia artificial para publicidad, cine y contenido social.",
+      "hero.cta": "Ver portfolio <span class='arrow'></span>",
+      "hero.scroll": "Scroll",
+      "hero.soundOff": "Sonido OFF",
+      "hero.soundOn": "Sonido ON",
+
+      "services.label": "Lo que hacemos",
+      "services.title": "Somos el estudio que las marcas eligen<br>cuando necesitan que la IA no parezca IA.",
+      "services.s1.h": "Dirección de Arte con IA",
+      "services.s1.p": "Campañas publicitarias, key visuals y contenido de marca con herramientas generativas bajo ojo de directora de arte.",
+      "services.s2.h": "Video & Motion",
+      "services.s2.p": "Cortos publicitarios, videoclips y piezas de motion con IA generativa. Del tratamiento creativo al producto final.",
+      "services.s3.h": "Contenido Social",
+      "services.s3.p": "Foto, video y motion para redes sociales. Producción ágil con calidad de campaña. Volumen sin sacrificar estética.",
+      "services.s4.h": "3D & Unreal Engine",
+      "services.s4.p": "Creación 3D, moodboards, tratamientos creativos con IA e integración con Unreal Engine para cine y publicidad.",
+
+      "portfolio.label": "Trabajos seleccionados",
+      "portfolio.title": "Portfolio",
+      "portfolio.cta": "Ver portfolio completo",
+      "portfolio.p1": "Corto publicitario \"Invisible\"",
+      "portfolio.p2": "Tratamiento creativo con IA",
+      "portfolio.p3": "RRSS YPF Full",
+      "portfolio.p4": "Video promocional",
+      "portfolio.p5": "Videoclip \"Cruella\"",
+      "portfolio.p6": "Videos testimoniales",
+
+      "manifesto.q": "\"Cruzamos cine, diseño e inteligencia artificial para crear lo que todavía <em>no existe.</em>\"",
+
+      "about.label": "El estudio",
+      "about.text": "<strong>Cuatro.ai</strong> nació de la convicción de que la inteligencia artificial no reemplaza la dirección de arte — la potencia. Somos un estudio boutique que combina <strong>ojo cinematográfico</strong> con las herramientas generativas más avanzadas para crear narrativas visuales que las marcas no podrían lograr de otra manera.",
+      "about.j.role": "Dirección de Arte",
+      "about.j.p": "Directora de arte con formación en cine y diseño. Lidera la visión creativa y estética de cada proyecto.",
+      "about.s.p": "Desarrolladora creativa especializada en herramientas generativas, 3D y desarrollo técnico de piezas con IA.",
+
+      "contact.label": "Hablemos",
+      "contact.follow": "Seguinos",
+
+      "footer.left": "© 2026 Cuatro.ai — Generative Art Direction",
+      "footer.right": "Buenos Aires, Argentina"
+    },
+
+    en: {
+      "nav.services": "Services",
+      "nav.portfolio": "Portfolio",
+      "nav.about": "About",
+      "nav.contact": "Contact",
+
+      "hero.eyebrow": "AI Creative Studio — Buenos Aires",
+      "hero.h1": "Artificial<br>creativity.<br><em>Real results.</em>",
+      "hero.sub": "Art direction + creative development with AI for advertising, film and social content.",
+      "hero.cta": "View portfolio <span class='arrow'></span>",
+      "hero.scroll": "Scroll",
+      "hero.soundOff": "Sound OFF",
+      "hero.soundOn": "Sound ON",
+
+      "services.label": "What we do",
+      "services.title": "We’re the studio brands choose<br>when they need AI that doesn’t look like AI.",
+      "services.s1.h": "AI Art Direction",
+      "services.s1.p": "Campaigns, key visuals and brand content using generative tools guided by strong art direction.",
+      "services.s2.h": "Video & Motion",
+      "services.s2.p": "Commercials, music videos and motion pieces with generative AI. From creative treatment to final delivery.",
+      "services.s3.h": "Social Content",
+      "services.s3.p": "Photo, video and motion for social. Fast production with campaign-level craft. Volume without losing aesthetics.",
+      "services.s4.h": "3D & Unreal Engine",
+      "services.s4.p": "3D creation, moodboards, AI creative treatments and Unreal Engine integration for film and advertising.",
+
+      "portfolio.label": "Selected work",
+      "portfolio.title": "Portfolio",
+      "portfolio.cta": "View full portfolio",
+      "portfolio.p1": "Commercial short \"Invisible\"",
+      "portfolio.p2": "AI creative treatment",
+      "portfolio.p3": "YPF social content",
+      "portfolio.p4": "Promotional video",
+      "portfolio.p5": "Music video \"Cruella\"",
+      "portfolio.p6": "Testimonial videos",
+
+      "manifesto.q": "\"We blend film, design and artificial intelligence to create what <em>doesn’t exist yet.</em>\"",
+
+      "about.label": "The studio",
+      "about.text": "<strong>Cuatro.ai</strong> was born from the belief that AI doesn’t replace art direction — it amplifies it. We’re a boutique studio combining a <strong>cinematic eye</strong> with advanced generative tools to craft visual narratives brands can’t achieve otherwise.",
+      "about.j.role": "Art Direction",
+      "about.j.p": "Art director with a background in film and design. Leads the creative vision and aesthetic of each project.",
+      "about.s.p": "Creative developer focused on generative tools, 3D and technical execution for AI-driven pieces.",
+
+      "contact.label": "Let’s talk",
+      "contact.follow": "Follow",
+
+      "footer.left": "© 2026 Cuatro.ai — Generative Art Direction",
+      "footer.right": "Buenos Aires, Argentina"
     }
+  };
 
-    // Toggle idioma
-    document.getElementById('langBtn').addEventListener('click', (e) => {
-      e.preventDefault();
-      setLang(lang === 'es' ? 'en' : 'es');
+  let lang = (navigator.language || "").toLowerCase().startsWith("es") ? "es" : "en";
+
+  function setLang(newLang) {
+    lang = newLang;
+    document.documentElement.lang = lang;
+
+    document.querySelectorAll("[data-i18n]").forEach(el => {
+      const key = el.getAttribute("data-i18n");
+      const val = STR[lang][key];
+      if (val !== undefined) el.innerHTML = val;
     });
 
-    // ----- SONIDO -----
-    const v = document.getElementById('heroVideo');
-    const soundBtn = document.getElementById('soundBtn');
-    const soundLabel = document.getElementById('soundLabel');
+    // Estado visual del toggle (simple)
+    document.getElementById("langToggle").textContent = (lang === "es") ? "ES / EN" : "EN / ES";
 
-    function syncSoundLabel(){
-      const key = v.muted ? 'ui.sound_off' : 'ui.sound_on';
-      soundLabel.textContent = STR[lang][key];
-    }
-
-    // Forzamos volumen y reproducción tras interacción
-    soundBtn.addEventListener('click', () => {
-      try {
-        v.muted = !v.muted;
-        if (!v.muted) {
-          v.volume = 1.0;
-          v.removeAttribute('muted'); // iOS/Safari
-        }
-        v.play().catch(()=>{});
-      } catch(e){}
-      syncSoundLabel();
-    });
-
-    // Sincroniza al cargar metadatos o cambios de volumen
-    ['loadedmetadata','volumechange','play','pause'].forEach(ev => v.addEventListener(ev, syncSoundLabel));
-
-    // Inicialización
-    setLang(lang);
+    // Actualizar texto del botón sonido según estado
     syncSoundLabel();
-  </script>
+  }
+
+  document.getElementById("langToggle").addEventListener("click", () => {
+    setLang(lang === "es" ? "en" : "es");
+  });
+
+  setLang(lang);
+
+  // ========= 3) Toggle de sonido =========
+  const soundBtn = document.getElementById("soundToggle");
+
+  function syncSoundLabel() {
+    const muted = heroVideo.muted;
+    const key = muted ? "hero.soundOff" : "hero.soundOn";
+    const label = STR[lang][key] || (muted ? "Sound OFF" : "Sound ON");
+    soundBtn.textContent = label;
+  }
+
+  soundBtn.addEventListener("click", () => {
+    heroVideo.muted = !heroVideo.muted;
+    heroVideo.play().catch(()=>{});
+    syncSoundLabel();
+  });
+
+  heroVideo.addEventListener("volumechange", syncSoundLabel);
+  heroVideo.addEventListener("loadedmetadata", syncSoundLabel);
+  syncSoundLabel();
+</script>
+
 </body>
 </html>
+
 
