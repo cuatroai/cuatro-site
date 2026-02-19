@@ -1,3 +1,12 @@
+html, body {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
 /* Minimal, clean */
 :root{
   --bg:#0b0b0b;
@@ -42,4 +51,11 @@ h3{font-size:18px;margin:0 0 8px}
 @media (max-width:560px){
   .grid{grid-template-columns:1fr}
   .gallery{grid-template-columns:1fr}
+}
+/* MOBILE FIX TITLE */
+h1 {
+  max-width: 100%;
+  font-size: clamp(42px, 10vw, 92px);
+  line-height: 0.95;
+  overflow-wrap: anywhere;
 }
